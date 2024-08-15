@@ -37,7 +37,7 @@ class PlayerCard extends StatelessWidget {
                     Colors.black.withOpacity(0.7),
                     Colors.transparent,
                   ],
-                  stops: [0.2, .6],
+                  stops: [0.3, 1],
                 ),
               ),
             ),
@@ -57,6 +57,7 @@ class PlayerCard extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
+                SizedBox(height: 4),
                 Text(
                   city,
                   style: GoogleFonts.barlow(
