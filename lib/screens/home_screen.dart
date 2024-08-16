@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../models/league.dart';
-import '../models/player.dart';
-import '../models/match.dart'; // Import the Match model
 import '../widgets/league_card.dart';
 import '../widgets/player_card.dart';
 import '../widgets/icon_widget.dart';
-import '../widgets/match_card.dart'; // Import the MatchCard widget
+import '../widgets/match_card.dart';
 import '../services/data_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,32 +13,94 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentSlide = 0;
+  int _currentIndex = 0;
+
+  final List<Widget> _screens = [
+    HomeScreenContent(),
+    const Center(child: Text('Explora Screen')),
+    const Center(child: Text('Notificaciones Screen')),
+    const Center(child: Text('Perfil Screen')),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildCarousel(),
-            _buildIconSection(),
-            _buildSectionTitle('Ligas'),
-            _buildLeagueSection(),
-            _buildSectionTitle('Jugadores Destacados'),
-            _buildPlayerSection(),
-            _buildSectionTitle('Partidos Abiertos'),
-            _buildMatchSection(),
-            SizedBox(height: 64), // Add white space at the bottom
-          ],
-        ),
+      body: _screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        selectedFontSize: 10,
+        unselectedFontSize: 10,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+              color: Colors.black,
+            ),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.sports_soccer,
+              color: Colors.black,
+            ),
+            label: 'Explora',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.notifications,
+              color: Colors.black,
+            ),
+            label: 'Notificaciones',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person,
+              color: Colors.black,
+            ),
+            label: 'Perfil',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeScreenContent extends StatefulWidget {
+  @override
+  _HomeScreenContentState createState() => _HomeScreenContentState();
+}
+
+class _HomeScreenContentState extends State<HomeScreenContent> {
+  int _currentSlide = 0; // Track the active slide index
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildCarousel(context),
+          _buildIconSection(),
+          _buildSectionTitle('Ligas'),
+          _buildLeagueSection(),
+          _buildSectionTitle('Jugadores Destacados'),
+          _buildPlayerSection(),
+          _buildSectionTitle('Partidos Abiertos'),
+          _buildMatchSection(),
+          SizedBox(height: 64),
+        ],
       ),
     );
   }
 
-  Widget _buildCarousel() {
+  Widget _buildCarousel(BuildContext context) {
     return Stack(
       children: [
         CarouselSlider(
@@ -83,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       ),
-                      _buildCarouselText(),
+                      _buildCarouselText(context),
                     ],
                   ),
                 );
@@ -96,7 +155,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildCarouselText() {
+  Widget _buildCarouselText(BuildContext context) {
     return Positioned(
       bottom: 40,
       left: 0,
@@ -141,11 +200,11 @@ class _HomeScreenState extends State<HomeScreen> {
       right: 0,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [0, 1, 2].map((index) {
+        children: List.generate(DataService.carouselImages.length, (index) {
           return Container(
             width: 8.0,
             height: 8.0,
-            margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
+            margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: _currentSlide == index
@@ -153,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   : Colors.white.withOpacity(0.4),
             ),
           );
-        }).toList(),
+        }),
       ),
     );
   }
