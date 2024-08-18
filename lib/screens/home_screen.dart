@@ -6,8 +6,11 @@ import '../widgets/player_card.dart';
 import '../widgets/icon_widget.dart';
 import '../widgets/match_card.dart';
 import '../services/data_service.dart';
+import 'profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,10 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _screens = [
-    HomeScreenContent(),
+    const HomeScreenContent(),
     const Center(child: Text('Explora Screen')),
     const Center(child: Text('Notificaciones Screen')),
-    const Center(child: Text('Perfil Screen')),
+    const ProfileScreen(),
   ];
 
   @override
@@ -73,6 +76,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class HomeScreenContent extends StatefulWidget {
+  const HomeScreenContent({super.key});
+
   @override
   _HomeScreenContentState createState() => _HomeScreenContentState();
 }
@@ -91,10 +96,10 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           _buildSectionTitle('Ligas'),
           _buildLeagueSection(),
           _buildSectionTitle('Jugadores Destacados'),
-          _buildPlayerSection(),
+          _buildPlayerSection(context), // Pass context to this function
           _buildSectionTitle('Partidos Abiertos'),
           _buildMatchSection(),
-          SizedBox(height: 64),
+          const SizedBox(height: 64),
         ],
       ),
     );
@@ -108,7 +113,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
             height: MediaQuery.of(context).size.height * 0.5,
             autoPlay: true,
             viewportFraction: 1.0,
-            autoPlayInterval: Duration(seconds: 5),
+            autoPlayInterval: const Duration(seconds: 5),
             onPageChanged: (index, reason) {
               setState(() {
                 _currentSlide = index;
@@ -137,7 +142,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                                 Colors.black.withOpacity(0.7),
                                 Colors.transparent,
                               ],
-                              stops: [0.3, 1],
+                              stops: const [0.3, 1],
                             ),
                           ),
                         ),
@@ -176,7 +181,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Dolor sit amet consectetur',
                 style: GoogleFonts.barlow(
@@ -220,7 +225,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   Widget _buildIconSection() {
     return Container(
       height: 80,
-      margin: EdgeInsets.symmetric(vertical: 16.0),
+      margin: const EdgeInsets.symmetric(vertical: 16.0),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -249,11 +254,11 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   }
 
   Widget _buildLeagueSection() {
-    return Container(
+    return SizedBox(
       height: 160,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemCount: DataService.leagues.length,
         itemBuilder: (context, index) {
           final league = DataService.leagues[index];
@@ -267,19 +272,29 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     );
   }
 
-  Widget _buildPlayerSection() {
-    return Container(
+  Widget _buildPlayerSection(BuildContext context) {
+    return SizedBox(
       height: 250,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemCount: DataService.players.length,
         itemBuilder: (context, index) {
           final player = DataService.players[index];
-          return PlayerCard(
-            imagePath: player.imagePath,
-            name: player.name,
-            city: player.city,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
+            child: PlayerCard(
+              imagePath: player.imagePath,
+              name: player.name,
+              city: player.city,
+            ),
           );
         },
       ),
@@ -287,11 +302,11 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
   }
 
   Widget _buildMatchSection() {
-    return Container(
+    return SizedBox(
       height: 180,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemCount: DataService.matches.length,
         itemBuilder: (context, index) {
           final match = DataService.matches[index];
