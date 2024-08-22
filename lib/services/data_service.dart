@@ -1,7 +1,8 @@
 import '../models/league.dart';
 import '../models/player.dart';
 import '../models/icon_item.dart';
-import '../models/match.dart'; // Import the Match model
+import '../models/match.dart';
+import '../models/team.dart'; // Import the Team model
 
 class DataService {
   static List<String> carouselImages = [
@@ -52,39 +53,38 @@ class DataService {
     Player(
       imagePath: 'assets/images/jugadores/jugador-3.jpg',
       name: 'Neymar Jr',
-      city: 'Mogi das Cruzes, Brazil',
+      city: 'Das Cruzes, Brazil',
     ),
     Player(
       imagePath: 'assets/images/jugadores/jugador-4.jpg',
-      name: 'Kylian Mbappé',
-      city: 'Paris, France',
+      name: 'Jude Bellingham',
+      city: 'London, England',
     ),
     Player(
       imagePath: 'assets/images/jugadores/jugador-5.jpg',
-      name: 'Mohamed Salah',
-      city: 'Nagrig, Egypt',
+      name: 'Vinicius Jr',
+      city: 'Nagrig, Brazil',
     ),
     Player(
       imagePath: 'assets/images/jugadores/jugador-6.jpg',
-      name: 'Robert Lewandowski',
+      name: 'Eerling Haaland',
       city: 'Warsaw, Poland',
     ),
   ];
 
   static List<IconItem> icons = [
     IconItem(
-        imagePath: 'assets/images/icons/section-icon-1.png', label: 'Partidos'),
+        imagePath: 'assets/images/icons/section-icon-1.png', label: 'Ligas'),
     IconItem(
-        imagePath: 'assets/images/icons/section-icon-2.png',
+        imagePath: 'assets/images/icons/section-icon-2.png', label: 'Partidos'),
+    IconItem(
+        imagePath: 'assets/images/icons/section-icon-3.png', label: 'Equipos'),
+    IconItem(
+        imagePath: 'assets/images/icons/section-icon-4.png',
         label: 'Jugadores'),
     IconItem(
-        imagePath: 'assets/images/icons/section-icon-3.png', label: 'Ligas'),
-    IconItem(
-        imagePath: 'assets/images/icons/section-icon-4.png', label: 'Canchas'),
-    IconItem(
-        imagePath: 'assets/images/icons/section-icon-5.png', label: 'Arbitros'),
-    IconItem(
-        imagePath: 'assets/images/icons/section-icon-6.png', label: 'Social'),
+        imagePath: 'assets/images/icons/section-icon-5.png',
+        label: 'Estadisticas'),
   ];
 
   static List<Match> matches = [
@@ -117,6 +117,29 @@ class DataService {
       date: DateTime(2024, 8, 24, 22, 00),
       type: '7v7',
       place: 'Court B',
+    ),
+  ];
+
+  static List<Team> teams = [
+    Team(
+      logoPath: 'assets/images/teams/team-1.jpg',
+      name: 'Real Madrid',
+    ),
+    Team(
+      logoPath: 'assets/images/teams/team-2.jpg',
+      name: 'Barcelona',
+    ),
+    Team(
+      logoPath: 'assets/images/teams/team-3.jpg',
+      name: 'Juventus',
+    ),
+    Team(
+      logoPath: 'assets/images/teams/team-4.jpg',
+      name: 'Bayern Munich',
+    ),
+    Team(
+      logoPath: 'assets/images/teams/team-5.jpg',
+      name: 'PSG',
     ),
   ];
 }

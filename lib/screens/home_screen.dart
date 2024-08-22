@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:korner/models/player.dart';
+import 'package:korner/screens/explore_screen.dart';
 import '../widgets/league_card.dart';
 import '../widgets/player_card.dart';
 import '../widgets/icon_widget.dart';
@@ -20,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _screens = [
     const HomeScreenContent(),
-    const Center(child: Text('Explora Screen')),
+    const ExploreScreen(),
     const Center(child: Text('Notificaciones Screen')),
     const ProfileScreen(),
   ];
@@ -83,7 +85,7 @@ class HomeScreenContent extends StatefulWidget {
 }
 
 class _HomeScreenContentState extends State<HomeScreenContent> {
-  int _currentSlide = 0; // Track the active slide index
+  int _currentSlide = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -92,11 +94,12 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildCarousel(context),
+          const SizedBox(height: 16),
           _buildIconSection(),
           _buildSectionTitle('Ligas'),
           _buildLeagueSection(),
           _buildSectionTitle('Jugadores Destacados'),
-          _buildPlayerSection(context), // Pass context to this function
+          _buildPlayerSection(),
           _buildSectionTitle('Partidos Abiertos'),
           _buildMatchSection(),
           const SizedBox(height: 64),
@@ -224,8 +227,8 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   Widget _buildIconSection() {
     return Container(
-      height: 80,
-      margin: const EdgeInsets.symmetric(vertical: 16.0),
+      height: 70,
+      margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Row(
@@ -272,7 +275,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     );
   }
 
-  Widget _buildPlayerSection(BuildContext context) {
+  Widget _buildPlayerSection() {
     return SizedBox(
       height: 250,
       child: ListView.builder(
@@ -281,21 +284,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         itemCount: DataService.players.length,
         itemBuilder: (context, index) {
           final player = DataService.players[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfileScreen(),
-                ),
-              );
-            },
-            child: PlayerCard(
-              imagePath: player.imagePath,
-              name: player.name,
-              city: player.city,
-            ),
-          );
+          return PlayerCard(player: player, type: PlayerCardType.standard);
         },
       ),
     );
