@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeScreenContent(),
     const ExploreScreen(),
-    const Center(child: Text('Notificaciones Screen')),
+    const Center(child: Text('Notifications Screen')),
     const ProfileScreen(),
   ];
 
