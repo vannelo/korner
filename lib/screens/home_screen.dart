@@ -9,6 +9,7 @@ import '../widgets/icon_widget.dart';
 import '../widgets/match_card.dart';
 import '../services/data_service.dart';
 import 'profile_screen.dart';
+import 'notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const HomeScreenContent(),
     const ExploreScreen(),
-    const Center(child: Text('Notificaciones Screen')),
+    const NotificationScreen(),
     const ProfileScreen(),
   ];
 
