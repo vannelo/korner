@@ -12,17 +12,14 @@ class WelcomeScreen extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
           );
         },
         child: Stack(
           children: [
             Container(
               decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('assets/images/welcome-bg.jpg'),
-                  fit: BoxFit.cover,
-                ),
+                color: Color(0xFF1E463E), // Replace with your desired color
               ),
             ),
             Center(
