@@ -3,13 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:korner/models/player.dart';
 import 'package:korner/screens/explore_screen.dart';
+import 'package:korner/screens/notifications_screen.dart';
+import 'package:korner/screens/messages_screen.dart';
+import 'package:korner/screens/profile_screen.dart';
 import '../widgets/league_card.dart';
 import '../widgets/player_card.dart';
 import '../widgets/icon_widget.dart';
 import '../widgets/match_card.dart';
 import '../services/data_service.dart';
-import 'profile_screen.dart';
-import 'notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeScreenContent(),
     const ExploreScreen(),
     const NotificationScreen(),
+    const MessagesScreen(),
     const ProfileScreen(),
   ];
 
@@ -64,6 +66,13 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.black,
             ),
             label: 'Notificaciones',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.message,
+              color: Colors.black,
+            ),
+            label: 'Mensajes', // New item added here
           ),
           BottomNavigationBarItem(
             icon: Icon(
