@@ -7,10 +7,10 @@ class PlayerCard extends StatelessWidget {
   final PlayerCardType type;
 
   const PlayerCard({
-    Key? key,
+    super.key,
     required this.player,
     this.type = PlayerCardType.standard,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
