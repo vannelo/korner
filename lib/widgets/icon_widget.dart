@@ -5,13 +5,13 @@ class IconWidget extends StatelessWidget {
   final String imagePath;
   final String label;
 
-  IconWidget({required this.imagePath, required this.label});
+  const IconWidget({super.key, required this.imagePath, required this.label});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 80,
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -21,7 +21,7 @@ class IconWidget extends StatelessWidget {
             height: 40,
             fit: BoxFit.contain,
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             label,
             style: GoogleFonts.barlow(

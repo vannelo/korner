@@ -6,7 +6,8 @@ class LeagueCard extends StatelessWidget {
   final String title;
   final String description;
 
-  LeagueCard({
+  const LeagueCard({
+    super.key,
     required this.imagePath,
     required this.title,
     required this.description,
@@ -16,7 +17,7 @@ class LeagueCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 200, // Fixed width for each card
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       decoration: BoxDecoration(
         border: Border.all(
           color: Colors.black12, // Solid gray border
@@ -35,13 +36,13 @@ class LeagueCard extends StatelessWidget {
                 image: AssetImage(imagePath),
                 fit: BoxFit.cover,
               ),
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8.0),
                 topRight: Radius.circular(8.0),
               ),
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           // Title
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -53,7 +54,7 @@ class LeagueCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           // Description
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

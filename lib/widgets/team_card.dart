@@ -4,7 +4,7 @@ import '../models/team.dart';
 class TeamCard extends StatelessWidget {
   final Team team;
 
-  const TeamCard({Key? key, required this.team}) : super(key: key);
+  const TeamCard({super.key, required this.team});
 
   @override
   Widget build(BuildContext context) {
