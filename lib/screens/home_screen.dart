@@ -6,6 +6,7 @@ import 'package:korner/screens/explore_screen.dart';
 import 'package:korner/screens/notifications_screen.dart';
 import 'package:korner/screens/messages_screen.dart';
 import 'package:korner/screens/profile_screen.dart';
+import 'package:korner/screens/league_screen.dart';
 import '../widgets/league_card.dart';
 import '../widgets/player_card.dart';
 import '../widgets/icon_widget.dart';
@@ -30,19 +31,23 @@ class _HomeScreenState extends State<HomeScreen> {
     const ProfileScreen(),
   ];
 
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       extendBodyBehindAppBar: true,
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
+        onTap: _onItemTapped,
         selectedFontSize: 10,
         unselectedFontSize: 10,
         items: const [
@@ -72,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Icons.message,
               color: Colors.black,
             ),
-            label: 'Mensajes', // New item added here
+            label: 'Mensajes',
           ),
           BottomNavigationBarItem(
             icon: Icon(
@@ -107,7 +112,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           const SizedBox(height: 16),
           _buildIconSection(),
           _buildSectionTitle('Ligas'),
-          _buildLeagueSection(),
+          _buildLeagueSection(context), // Pass context here
           _buildSectionTitle('Jugadores Destacados'),
           _buildPlayerSection(),
           _buildSectionTitle('Partidos Abiertos'),
@@ -266,7 +271,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
     );
   }
 
-  Widget _buildLeagueSection() {
+  Widget _buildLeagueSection(BuildContext context) {
     return SizedBox(
       height: 160,
       child: ListView.builder(
@@ -275,10 +280,20 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
         itemCount: DataService.leagues.length,
         itemBuilder: (context, index) {
           final league = DataService.leagues[index];
-          return LeagueCard(
-            imagePath: league.imagePath,
-            title: league.title,
-            description: league.description,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const LeagueScreen(),
+                ),
+              );
+            },
+            child: LeagueCard(
+              imagePath: league.imagePath,
+              title: league.title,
+              description: league.description,
+            ),
           );
         },
       ),
