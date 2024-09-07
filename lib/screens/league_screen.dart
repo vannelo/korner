@@ -353,10 +353,10 @@ class LeagueScreen extends StatelessWidget {
     ];
 
     return SizedBox(
-      height: 120,
+      height: 150,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemCount: tournaments.length,
         itemBuilder: (context, index) {
           final tournament = tournaments[index];
