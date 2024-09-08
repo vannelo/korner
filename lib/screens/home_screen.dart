@@ -112,7 +112,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
           const SizedBox(height: 16),
           _buildIconSection(),
           _buildSectionTitle('Ligas'),
-          _buildLeagueSection(context), // Pass context here
+          _buildLeagueSection(context),
           _buildSectionTitle('Jugadores Destacados'),
           _buildPlayerSection(),
           _buildSectionTitle('Partidos Abiertos'),
@@ -273,7 +273,7 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
 
   Widget _buildLeagueSection(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 170,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -285,14 +285,21 @@ class _HomeScreenContentState extends State<HomeScreenContent> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const LeagueScreen(),
+                  builder: (context) => LeagueScreen(
+                    leagueTitle: league.title,
+                    leagueCover: league.imagePath,
+                    leagueLogo: league.logoPath,
+                    leagueCity: league.city,
+                    leagueDescription: league.description,
+                  ),
                 ),
               );
             },
             child: LeagueCard(
               imagePath: league.imagePath,
               title: league.title,
-              description: league.description,
+              logoPath: league.logoPath,
+              city: league.city,
             ),
           );
         },

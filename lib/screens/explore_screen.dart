@@ -5,6 +5,7 @@ import '../services/data_service.dart';
 import '../widgets/league_card.dart';
 import '../widgets/team_card.dart';
 import '../widgets/player_card.dart';
+import '../screens/league_screen.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({super.key});
@@ -12,13 +13,14 @@ class ExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 64),
             _buildSectionTitle(context, 'Ligas'),
-            _buildLeagueSection(),
+            _buildLeagueSection(context),
             _buildSectionTitle(context, 'Partidos Abiertos'),
             _buildMatchSection(),
             _buildSectionTitle(context, 'Equipos Abiertos'),
@@ -60,19 +62,36 @@ class ExploreScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLeagueSection() {
+  Widget _buildLeagueSection(BuildContext context) {
     return SizedBox(
-      height: 160,
+      height: 170,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         itemCount: DataService.leagues.length,
         itemBuilder: (context, index) {
           final league = DataService.leagues[index];
-          return LeagueCard(
-            imagePath: league.imagePath,
-            title: league.title,
-            description: league.description,
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LeagueScreen(
+                    leagueTitle: league.title,
+                    leagueCover: league.imagePath,
+                    leagueLogo: league.logoPath,
+                    leagueCity: league.city,
+                    leagueDescription: league.description,
+                  ),
+                ),
+              );
+            },
+            child: LeagueCard(
+              imagePath: league.imagePath,
+              title: league.title,
+              logoPath: league.logoPath,
+              city: league.city,
+            ),
           );
         },
       ),
