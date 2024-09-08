@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:korner/screens/home_screen.dart';
 import '../services/data_service.dart';
 import '../widgets/team_card.dart';
 import '../widgets/tournament_card.dart';
 
 class LeagueScreen extends StatelessWidget {
-  const LeagueScreen({super.key});
+  final String leagueTitle;
+  final String leagueCover;
+  final String leagueLogo;
+  final String leagueCity;
+  final String leagueDescription;
+
+  const LeagueScreen({
+    super.key,
+    required this.leagueTitle,
+    required this.leagueCover,
+    required this.leagueLogo,
+    required this.leagueCity,
+    required this.leagueDescription,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +37,9 @@ class LeagueScreen extends StatelessWidget {
           children: [
             Container(
               height: MediaQuery.of(context).size.height * 0.24,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/leagues/league-cover-1.jpg'),
+                  image: AssetImage(leagueCover),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -57,51 +69,46 @@ class LeagueScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const CircleAvatar(
+                    child: CircleAvatar(
                       radius: 75,
-                      backgroundImage:
-                          AssetImage('assets/images/leagues/league-logo-1.jpg'),
+                      backgroundImage: AssetImage(leagueLogo),
                       backgroundColor: Colors.white,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 8,
-            ),
+            const SizedBox(height: 8),
             Center(
               child: Column(
                 children: [
-                  const Text(
-                    'Olympus Futbol',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  Text(
+                    leagueTitle,
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                  const Text(
-                    'Liga de Futbol 7 | CDMX',
+                  Text(
+                    leagueCity,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.black45,
-                        fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Colors.black45,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 32.0),
+                  const SizedBox(height: 8),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32.0),
                     child: Text(
-                      'Somos una liga de futbol 7 en la Ciudad de México. ¡Únete a nosotros y vive la pasión del futbol!',
+                      leagueDescription,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Colors.black54,
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -112,23 +119,14 @@ class LeagueScreen extends StatelessWidget {
                       _buildColumn(context, '65', 'Equipos'),
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(
                         width: 120,
                         child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomeScreen(),
-                              ),
-                            );
-                          },
+                          onPressed: () {},
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
@@ -138,19 +136,15 @@ class LeagueScreen extends StatelessWidget {
                             backgroundColor: Colors.black87,
                             shadowColor: Colors.black.withOpacity(0.2),
                           ),
-                          child: const Text(
-                            'Seguir',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          child: const Text('Seguir',
+                              style: TextStyle(color: Colors.white)),
                         ),
                       ),
                       const SizedBox(width: 16),
                       SizedBox(
                         width: 120,
                         child: OutlinedButton(
-                          onPressed: () {
-                            // Add message functionality here
-                          },
+                          onPressed: () {},
                           style: OutlinedButton.styleFrom(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
@@ -159,17 +153,13 @@ class LeagueScreen extends StatelessWidget {
                             ),
                             side: const BorderSide(color: Colors.black54),
                           ),
-                          child: const Text(
-                            'Mensaje',
-                            style: TextStyle(color: Colors.black54),
-                          ),
+                          child: const Text('Mensaje',
+                              style: TextStyle(color: Colors.black54)),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   SizedBox(
                     height: 200,
                     child: ListView.builder(
@@ -178,7 +168,7 @@ class LeagueScreen extends StatelessWidget {
                       itemCount: 6,
                       itemBuilder: (context, index) {
                         return Container(
-                          width: 150, // Adjust width as needed
+                          width: 150,
                           margin: const EdgeInsets.symmetric(horizontal: 8.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8.0),
@@ -192,99 +182,21 @@ class LeagueScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   _buildSectionTitle(context, 'Equipos en la Liga'),
                   _buildTeamSection(),
                   const SizedBox(height: 8),
                   _buildSectionTitle(context, 'Torneos'),
                   _buildTournamentSection(),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  const SizedBox(height: 8),
                   _buildSectionTitle(context, 'Reseñas'),
-                  SizedBox(
-                    height: 120, // Reduced height
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      itemCount: 5, // Adjust based on your data
-                      itemBuilder: (context, index) {
-                        return Container(
-                          width: 200, // Adjust width as needed
-                          margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                          padding: const EdgeInsets.all(8.0), // Reduced padding
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Colors.black12, // Solid gray border
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                children: List.generate(5, (starIndex) {
-                                  return Icon(
-                                    Icons.star,
-                                    color: starIndex < 4
-                                        ? Colors.orange
-                                        : Colors.grey,
-                                    size: 14, // Reduced star size
-                                  );
-                                }),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Excelente Jugador',
-                                style: TextStyle(
-                                  fontSize: 14, // Reduced font size
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                'Ronaldo es un jugador increíble con una gran habilidad para anotar goles en cualquier situación.',
-                                style: TextStyle(
-                                  fontSize: 12, // Reduced font size
-                                  color: Colors.black54,
-                                ),
-                                maxLines: 2, // Adjust for smaller height
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                  ),
+                  _buildReviewSection(),
                   const SizedBox(height: 64),
                 ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildSectionTitle(BuildContext context, String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }
@@ -321,6 +233,24 @@ class LeagueScreen extends StatelessWidget {
     );
   }
 
+  Widget _buildSectionTitle(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   Widget _buildTeamSection() {
     return SizedBox(
       height: 140,
@@ -337,7 +267,6 @@ class LeagueScreen extends StatelessWidget {
   }
 
   Widget _buildTournamentSection() {
-    // Example tournament data
     final tournaments = [
       {'name': 'Torneo de Invierno', 'category': 'Futbol 7', 'isActive': true},
       {
@@ -361,9 +290,58 @@ class LeagueScreen extends StatelessWidget {
         itemBuilder: (context, index) {
           final tournament = tournaments[index];
           return TournamentCard(
-            name: tournament['name']!.toString(),
+            name: tournament['name']! as String,
             category: tournament['category']! as String,
             isActive: tournament['isActive']! as bool,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildReviewSection() {
+    return SizedBox(
+      height: 120,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        itemCount: 5,
+        itemBuilder: (context, index) {
+          return Container(
+            width: 200,
+            margin: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border.all(color: Colors.black12, width: 1.0),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: List.generate(5, (starIndex) {
+                    return Icon(
+                      Icons.star,
+                      color: starIndex < 4 ? Colors.orange : Colors.grey,
+                      size: 14,
+                    );
+                  }),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Excelente Jugador',
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 4),
+                const Text(
+                  'Ronaldo es un jugador increíble con una gran habilidad para anotar goles en cualquier situación.',
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ),
           );
         },
       ),

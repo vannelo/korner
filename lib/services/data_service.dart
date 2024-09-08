@@ -14,28 +14,43 @@ class DataService {
   static List<League> leagues = [
     League(
       imagePath: 'assets/images/ligas/liga-1.jpg',
-      title: 'Premier League',
-      description: 'Top English football league.',
+      logoPath: 'assets/images/leagues/league-1-logo.jpg',
+      title: 'Nova 11',
+      description:
+          'Esta liga de fútbol 11 se centra en el talento emergente y las promesas del fútbol mundial.',
+      city: 'CDMX, México',
     ),
     League(
       imagePath: 'assets/images/ligas/liga-2.jpg',
-      title: 'La Liga',
-      description: 'Top Spanish football league.',
+      logoPath: 'assets/images/leagues/league-2-logo.jpg',
+      title: 'Premier Fut',
+      description:
+          'Liga internacional que reúne a equipos de diferentes continentes en la competencia más ambiciosa del fútbol 11.',
+      city: 'Puebla, México',
     ),
     League(
       imagePath: 'assets/images/ligas/liga-3.jpg',
-      title: 'Serie A',
-      description: 'Top Italian football league.',
+      logoPath: 'assets/images/leagues/league-3-logo.jpg',
+      title: 'Elite League',
+      description:
+          'Solo los equipos con precisión y estrategia sobreviven. Esta liga de fútbol 7 combina lo mejor de la táctica y la agilidad.',
+      city: 'Guadalajara, México',
     ),
     League(
       imagePath: 'assets/images/ligas/liga-4.jpg',
-      title: 'Bundesliga',
-      description: 'Top German football league.',
+      logoPath: 'assets/images/leagues/league-4-logo.jpg',
+      title: 'Futzone 5',
+      description:
+          'FutZone 5 es una liga de fútbol 5 caracterizada por su rapidez y emoción con partidos cortos pero llenos de acción.',
+      city: "Monterrey, México",
     ),
     League(
       imagePath: 'assets/images/ligas/liga-5.jpg',
-      title: 'Ligue 1',
-      description: 'Top French football league.',
+      logoPath: 'assets/images/leagues/league-5-logo.jpg',
+      title: 'Olympic Futbol',
+      description:
+          'La liga más prestigiosa de fútbol 7, donde solo los equipos más élite compiten. Inspirada en los dioses del Olimpo.',
+      city: 'CDMX, México',
     ),
   ];
 
